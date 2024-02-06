@@ -19,6 +19,8 @@ def mainMenu():
             quitting()
             break	
         if user_input == "C":
+            os.system("cls")
+            createManipulator()
             continue
         if user_input == "M":
             continue
@@ -35,7 +37,16 @@ def quitting():
 
 def createManipulator():
     print("We are know creating a Manipulator")
-    print("What type of Joint Variable?")
-    
+    print("   What type of Joint Variable?   ")
+    print("[R]          Revolute             ")
+    print("[P]          Pristmatic           ")
+    user_input = input("...")
+    if user_input == 'R':
+        print("indicate what orientation of its z-axis")
+        orientation = input("")
     pass
+
+
+
+
 mainMenu()

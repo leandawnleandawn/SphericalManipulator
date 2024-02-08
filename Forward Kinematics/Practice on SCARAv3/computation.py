@@ -17,7 +17,9 @@ class Joint(Robot):
     '''The Following Blueprint of the Joints connecting the Robot
 	Child: Prismatic and Revolute
     '''    
-    def __init__(self, z_orientation = np.array([0,0,0])):
+    def __init__(self, x_orientation = np.array([0,0,0]), y_orientation = np.array([0,0,0]), z_orientation = np.array([0,0,0])):
+        self.x_orientation = x_orientation
+        self.y_orientation = y_orientation
         self.z_orientation = z_orientation
     
 class Prismatic(Joint):
@@ -53,6 +55,7 @@ def mainMenu():
             createManipulator()
             continue
         if user_input == "M":
+            manualRead()
             continue
 
 def quitting():
@@ -73,46 +76,29 @@ def createManipulator():
         print("[R]          Revolute             ")
         print("[P]          Pristmatic           ")
         print("[V]         View Joints           ")
-        print("[-1]         End the Operation     ")
+        print("[a]   Confirm the Joints Created  ")
+        print("[-1]        End the Operation     ")
         user_input = input("...")
         if user_input == 'R':
             print("indicate what z_orientation of its z-axis")
             orientation_input = input("([F]orward, [B]ackward, [L]eft, [R]ight, [U]p, [D]own)...")
             joints[i] = Revolute()
-            if orientation_input == "L":
-                joints[i].z_orientation = np.array([1, 0, 0])
-            if orientation_input == "R":
-                joints[i].z_orientation = np.array([-1, 0, 0])
-            if orientation_input == "F":
-                joints[i].z_orientation = np.array([0, -1, 0])
-            if orientation_input == "B":
-                joints[i].z_orientation = np.array([0, 1, 0])
-            if orientation_input == "U":
-                joints[i].z_orientation = np.array([0, 0, 1])
-            if orientation_input == "U":
-            	joints[i].z_orientation = np.array([0, 0, -1])
+            assignorientjoint(joints, i, orientation_input)
             i += 1
         if user_input == 'P':
             print("indicate what z_orientation of its z-axis")
             orientation_input = input("([F]orward, [B]ackward, [L]eft, [R]ight, [U]p, [D]own)...")
             joints[i] = Prismatic()
-            if orientation_input == "L":
-                joints[i].z_orientation = np.array([1, 0, 0])
-            if orientation_input == "R":
-                joints[i].z_orientation = np.array([-1, 0, 0])
-            if orientation_input == "F":
-                joints[i].z_orientation = np.array([0, -1, 0])
-            if orientation_input == "B":
-                joints[i].z_orientation = np.array([0, 1, 0])
-            if orientation_input == "U":
-                joints[i].z_orientation = np.array([0, 0, 1])
-            if orientation_input == "U":
-            	joints[i].z_orientation = np.array([0, 0, -1])
+            assignorientjoint(joints, i, orientation_input)
             i += 1
         if user_input == 'V':
             for i,j in joints.items():
                 print(f"Joint {i+1}", end = " ")
                 print(j.z_orientation)
+            os.system("pause")
+        if user_input == "a":
+            print("Creating the following Frames of the manipulator, Confirming the following links")
+            linkagecreate()
         if user_input == "-1":
             print("Exiting the following menu", end = " ")
             for i in range(3):
@@ -120,7 +106,24 @@ def createManipulator():
                 time.sleep(1)
             break
 
+def assignorientjoint(joints, i, orientation_input):
+    if orientation_input == "L":
+        joints[i].z_orientation = np.array([1, 0, 0])
+    if orientation_input == "R":
+        joints[i].z_orientation = np.array([-1, 0, 0])
+    if orientation_input == "F":
+        joints[i].z_orientation = np.array([0, -1, 0])
+    if orientation_input == "B":
+        joints[i].z_orientation = np.array([0, 1, 0])
+    if orientation_input == "U":
+        joints[i].z_orientation = np.array([0, 0, 1])
+    if orientation_input == "U":
+     joints[i].z_orientation = np.array([0, 0, -1])
 
-
+def manualRead():
+    pass
+    
+def linkagecreate():
+    
 
 mainMenu()

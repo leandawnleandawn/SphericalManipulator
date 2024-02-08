@@ -58,6 +58,8 @@ d1 = convert_to_meters(d1)
 theta2 = convert_to_radians(theta2)
 theta3 = convert_to_radians(theta3)
 
+# Take Note: This is derived from the Denavit Hartenberg Parametric Table in columns of 
+# Theta, Alpha, R, and D
 paramteric_table = [[0,0,0,a1+d1],
                     [theta2, 0, a2, 0],
                     [theta3, 0, a4, a3],
@@ -67,7 +69,6 @@ htm = {}
 
 for i in range(3):
 	htm[i] = dhMatrix(paramteric_table[i][0], paramteric_table[i][1], paramteric_table[i][2], paramteric_table[i][3])
-
 
 for i,j in htm.items():
     print(i, j)

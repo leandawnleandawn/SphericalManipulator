@@ -1,0 +1,3 @@
+There is an important distinction between a path and a trajectory. 
+A path is a spatial construct and tells us how we get from A to B through the world. 
+A trajectory is a path plus a schedule. It tells us how quickly we should move along the path, at what time we should be at what point along the path.

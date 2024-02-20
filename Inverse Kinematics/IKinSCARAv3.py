@@ -18,7 +18,8 @@ class Robot:
         self.y = float(input("y >> "))
         self.z = float(input("z >> "))
         
-    def 
+    def iKin(self):
+        pass
   
 scarav3 = Robot()
 

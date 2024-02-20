@@ -17,3 +17,5 @@ a1, a2, a3, a4 = defineJoints()
 x_03, y_03, z_03 = defineJoints()
 
 phi2 = np.arctan(y_03/x_03)
+
+

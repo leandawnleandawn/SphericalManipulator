@@ -17,7 +17,6 @@ class Robot:
         self.x = float(input("x >> "))
         self.y = float(input("y >> "))
         self.z = float(input("z >> "))
-        
     def iKin(self):
         pass
   

@@ -20,14 +20,6 @@ def invKins(a1, x_03, y_03, z_03):
     d3 = np.sqrt((r**2) + (s**2)) - a2 - a3
     return theta1, theta2, d3
 
-def dhMatrix(theta, alpha, radius, distance):
-    return np.matrix([
-		[np.cos(theta), -np.sin(theta)*np.cos(alpha), np.sin(theta)*np.sin(alpha), radius*np.cos(theta)],
-        [np.sin(theta), np.cos(theta)*np.cos(alpha), -np.cos(theta)*np.sin(alpha), radius*np.sin(theta)],
-        [0, np.sin(alpha), np.cos(alpha), distance],
-        [0,0,0,1],		
-	])
-    
 a1, a2, a3 = defineLinks()
 
 x_03, y_03, z_03 = defineJoints()

@@ -64,8 +64,9 @@ for i in range(3):
 	htm[i] = dhMatrix(paramteric_table[i][0], paramteric_table[i][1], paramteric_table[i][2], paramteric_table[i][3])
 
 for i,j in htm.items():
-    print(j)
+    print(f"HTM # {i+1}")
+    print(np.round(j, 2))
     
 result = np.dot(np.dot(htm[0], htm[1]), htm[2])
-
-print(result)
+print("H0_3")
+print(np.round(result, 2))

@@ -9,20 +9,20 @@ class RoboticProgram(tk.Tk):
         super().__init__()
         
         self.title("GUI Programming")
-        self.label = ttk.Label(text = "Hello World")
+        self.label = tk.Label(text = "Hello World")
         self.label.pack()
         
-        self.result = ttk.Label(text = "Result: ")
+        self.result = tk.Label(text = "Result: ")
         self.result.pack()
         
-        self.entry = ttk.Entry(width = 10)
+        self.entry = tk.Entry(width = 10)
         self.entry.pack()
         
-        self.button = ttk.Button(text = "Display", command = self.printVal)
+        self.button = tk.Button(text = "Display", command = self.printVal)
         self.button.pack()
         
     def printVal(self):
-        self.result["text"] = self.entry.get()
+        self.result["text"] = f"Result: {self.entry.get()}"
 
 robot = RoboticProgram()
 robot.mainloop()

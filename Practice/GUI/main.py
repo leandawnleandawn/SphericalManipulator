@@ -1,6 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
-import customtkinter
+import customtkinter as ctk
 from roboticstoolbox import SerialLink, RevoluteDH, PrismaticDH
 
 class RoboticProgram(tk.Tk):

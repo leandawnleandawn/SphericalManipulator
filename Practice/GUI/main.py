@@ -7,22 +7,32 @@ class RoboticProgram(tk.Tk):
     def __init__(self):
         super().__init__()
         
-        self.title("GUI Programming")
-        self.label = tk.Label(text = "Hello World")
-        self.label.pack()
+        self.title("Kinematic Analysis")
+        self.windowTitle = tk.Label(text="Kinematic Analysis Calculator")
+        self.windowTitle.pack()
         
-        self.result = tk.Label(text = "Result: ")
-        self.result.pack()
+        self.FKin = tk.Button(text = "Forward Kinematics", command = FKinWindow)
+        self.FKin.pack()
         
-        self.entry = tk.Entry(width = 10)
-        self.entry.pack()
+        self.IKin = tk.Button(text = "Inverse Kinematics", command= IKinWindow)
+        self.IKin.pack()
         
-        self.button = tk.Button(text = "Display", command = self.printVal)
-        self.button.pack()
-        
-    def printVal(self):
-        self.result["text"] = f"Result: {self.entry.get()}"
+        self.JBin = tk.Button(text = "Jacobian Matrix", command= IKinWindow)
+        self.JBin.pack()
 
+class FKinWindow:
+    def __init__(self):
+        self.windowTitle = tk.Toplevel(master = robot)
+        
+        
+class IKinWindow:
+    def __init__(self):
+        self.windowTitle = tk.Toplevel(master = robot)
+        
+class JBinWindow:
+    def __init__(self):
+        self.windowTitle = tk.Toplevel(master = robot)
+        
 robot = RoboticProgram()
 robot.mainloop()
 

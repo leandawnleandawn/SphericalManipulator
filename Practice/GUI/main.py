@@ -113,11 +113,18 @@ class Window(RoboticProgram):
         self.T1data.delete(0, 'end')
         self.T2data.delete(0,'end')
         self.d3data.delete(0, 'end')
-        
+        self.Xdata.delete(0, 'end')
+        self.Ydata.delete(0, 'end')
+        self.Zdata.delete(0, 'end')
         
 class FkinWindow(Window):	
     def __init__(self):
         super().__init__()
+        
+        self.Xdata.config(state= tk.DISABLED)
+        self.Ydata.config(state= tk.DISABLED)
+        self.Zdata.config(state= tk.DISABLED)
+        
         self.windowTitle.title("Foward Kinematics")
         
         BF = tk.LabelFrame(master=self.windowTitle, font=(5))
@@ -128,7 +135,15 @@ class FkinWindow(Window):
         reset = tk.Button(BF, text = "Reset", command=self.reset)
         reset.grid(row=0, column=1)
         
+        
+        
     def fkin(self):
+        self.Xdata.config(state= tk.NORMAL)
+        self.Ydata.config(state= tk.NORMAL)
+        self.Zdata.config(state= tk.NORMAL)
+        self.Xdata.delete(0, 'end')
+        self.Ydata.delete(0, 'end')
+        self.Zdata.delete(0, 'end')
         try:
             a1 = float(self.a1data.get()) / 100
             a2 = float(self.a2data.get()) / 100
@@ -160,12 +175,16 @@ class FkinWindow(Window):
         self.Ydata.insert(tk.END, np.round(result[1,3],2))
         self.Zdata.insert(tk.END, np.round(result[2,3],2))
         
+        self.Xdata.config(state= tk.DISABLED)
+        self.Ydata.config(state= tk.DISABLED)
+        self.Zdata.config(state= tk.DISABLED)
+        
     def dhMatrix(self, theta, alpha, radius, distance):
     	return np.matrix([
 			[np.cos(theta), -np.sin(theta)*np.cos(alpha), np.sin(theta)*np.sin(alpha), radius*np.cos(theta)],
         	[np.sin(theta), np.cos(theta)*np.cos(alpha), -np.cos(theta)*np.sin(alpha), radius*np.sin(theta)],
         	[0, np.sin(alpha), np.cos(alpha), distance],
-        	[0,0,0,1],		
+        	[0,0,0,1]
 		])
     
 class IkinWindow(Window):

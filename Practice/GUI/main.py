@@ -7,8 +7,8 @@ class RoboticProgram(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        self.title("Kinematic Analysis")
-        self.windowTitle = tk.Label(text="Kinematic Analysis Calculator")
+        self.title("Kinematic Analysis of a Spherical Manipulator")
+        self.windowTitle = tk.Label(text="Kinematic Analysis Calculator of a Spherical Manipulator")
         self.windowTitle.pack()
         
         FKin = tk.Button(text = "Forward Kinematics", command = FkinWindow)
@@ -135,6 +135,7 @@ class FkinWindow(Window):
         reset = tk.Button(BF, text = "Reset", command=self.reset)
         reset.grid(row=0, column=1)
         
+        self.robotTB(1,0.5,0.5,0,0,0)
         
         
     def fkin(self):
@@ -179,14 +180,25 @@ class FkinWindow(Window):
         self.Ydata.config(state= tk.DISABLED)
         self.Zdata.config(state= tk.DISABLED)
         
+        self.robotTB(a1, a2, a3, t1, t2, d3)
+        
     def dhMatrix(self, theta, alpha, radius, distance):
     	return np.matrix([
 			[np.cos(theta), -np.sin(theta)*np.cos(alpha), np.sin(theta)*np.sin(alpha), radius*np.cos(theta)],
         	[np.sin(theta), np.cos(theta)*np.cos(alpha), -np.cos(theta)*np.sin(alpha), radius*np.sin(theta)],
         	[0, np.sin(alpha), np.cos(alpha), distance],
-        	[0,0,0,1]
-		])
-    
+        	[0,0,0,1]])
+     
+    def robotTB(self, a1, a2, a3, t1, t2, d3):
+        # print("creating the following object")
+        H01 = RevoluteDH(a1, 0, np.pi/2, 0, [-np.pi/2, np.pi/2])
+        H12 = RevoluteDH(0, 0, np.pi/2, np.pi/2, [-np.pi/2, np.pi/2])
+        H23 = PrismaticDH(0,0,0,a2+a3,[0, 0.05])
+        # print("Initializing")
+        sphericalManipulator = SerialLink([H01, H12, H23])
+        sphericalManipulator.plot([t1, t2, d3])
+        # print("Finished")
+
 class IkinWindow(Window):
     def __init__(self):
         super().__init__()

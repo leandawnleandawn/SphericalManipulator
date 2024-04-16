@@ -2,6 +2,7 @@ import numpy as np
 import sympy as syp
 
 
+
 def defineLinks():
     a1 = float(input("a_1 Link [mm]>>>"))
     a2 = float(input("a_2 Link [mm]>>>"))
@@ -101,6 +102,30 @@ Jw = np.concatenate([Jw_1, Jw_2, Jw_3], 1)
 
 J = np.concatenate([Jv, Jw], 0)
 
+# Creating the following Unknown Variables
+
+t = syp.Symbol("t")
+
+x = syp.Function("x")
+y=  syp.Function("y")
+z = syp.Function("z")
+theta_x = syp.Function("theta_x")
+theta_y = syp.Function("theta_y")
+theta_z = syp.Function("theta_z")
+
+d1 = syp.Function("d_1")
+theta_2 = syp.Function("theta_2")
+theta_3 = syp.Function("theta_3")
+
+
+q = syp.Matrix([[syp.diff(d1(t))], [syp.diff(theta_2(t))], [syp.diff(theta_3(t))]])
+p = syp.Matrix([[syp.diff(x(t))], [syp.diff(y(t))], [syp.diff(z(t))], [syp.diff(theta_x(t))], [syp.diff(theta_y(t))], [syp.diff(theta_z(t))]])
+syp.init_printing()
 print(J)
+Jacobian_matrix = syp.Eq(p, J*q)
+
+
+print(syp.pretty(Jacobian_matrix))
+
 
 

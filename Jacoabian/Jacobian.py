@@ -118,14 +118,21 @@ theta_2 = syp.Function("theta_2")
 theta_3 = syp.Function("theta_3")
 
 
-q = syp.Matrix([[syp.diff(d1(t))], [syp.diff(theta_2(t))], [syp.diff(theta_3(t))]])
-p = syp.Matrix([[syp.diff(x(t))], [syp.diff(y(t))], [syp.diff(z(t))], [syp.diff(theta_x(t))], [syp.diff(theta_y(t))], [syp.diff(theta_z(t))]])
+joint_variables = syp.Matrix([[syp.diff(d1(t))], [syp.diff(theta_2(t))], [syp.diff(theta_3(t))]])
+position_variables = syp.Matrix([[syp.diff(x(t))], [syp.diff(y(t))], [syp.diff(z(t))], [syp.diff(theta_x(t))], [syp.diff(theta_y(t))], [syp.diff(theta_z(t))]])
 syp.init_printing()
 print(J)
-Jacobian_matrix = syp.Eq(p, J*q)
+Jacobian_matrix = syp.Eq(position_variables, J*joint_variables)
 
 
 print(syp.pretty(Jacobian_matrix))
 
+#Singularity
 
+singularity = np.linalg.det(Jv)
 
+print(singularity)
+
+inverseJacobian = np.linalg.inv(Jv)
+
+print(inverseJacobian)

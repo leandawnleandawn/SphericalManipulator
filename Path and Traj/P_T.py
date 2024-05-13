@@ -19,7 +19,6 @@ H23 = PrismaticDH(0,0,0,a2+a3,[0, 0.05])
 sphericalManipulator = SerialLink([H01, H12, H23])
 
 print(sphericalManipulator)
-sphericalManipulator.teach([0,0,0])
 
 def defineJoints():
     theta_1 = float(input("Revolute Joint 1 [deg]>>>"))
@@ -27,18 +26,13 @@ def defineJoints():
     d_3 = float(input("Prismatic Joint 3 [mm]>>>"))
     return theta_1, theta_2, d_3
 
-theta_11, theta_21, d_31 = defineJoints()
-theta_12, theta_22, d_32 = defineJoints()
-theta_13, theta_23, d_33 = defineJoints()
 
-q1 = np.array(theta_11, theta_21, d_31)
-q2 = np.array(theta_12, theta_22, d_32)
-q3 = np.array(theta_13, theta_23, d_33)
+q1 = np.array([np.pi/4, np.pi/4, 3])
+q2 = np.array([np.pi/3, np.pi/3, 3])
 
+t = np.linspace(0, 20, num = 50)
+traj1 = rtb.jtraj(q1, q2, t)
 
-traj1 = rtb.jtraj(q1, q2, 20)
-traj2 = rtb.jtraj(q2, q3, 20)
-traj3 = rtb.jtraj(q3, q1, 20)
+print(traj1)
 
-
-sphericalManipulator.plot(traj1)
+sphericalManipulator.plot(traj1.s)

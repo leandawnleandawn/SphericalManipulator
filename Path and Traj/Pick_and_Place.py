@@ -55,11 +55,14 @@ q2 = np.array([box1T1, box1T2, box1d3])
 
 t = np.linspace(0, 20, num = 50)
 traj1 = rtb.jtraj(q0, q1, t)
-traj2 = rtb.jtraj(q1, q2, t)
-traj3 = rtb.jtraj(q2, q0, t)
+traj2 = rtb.jtraj(q1, q0, t)
+traj3 = rtb.jtraj(q0, q2, t)
+traj4 = rtb.jtraj(q2, q0, t)
 
 print(traj1)
 
-sphericalManipulator.plot(traj1.s, limits = [-5, 30, -10, 10, 0, 30])
-sphericalManipulator.plot(traj2.s, limits = [-5, 30, -10, 10, 0, 30])
-sphericalManipulator.plot(traj3.s, limits = [-5, 30, -10, 10, 0, 30])
+while True:
+    sphericalManipulator.plot(traj1.s, limits = [-5, 30, -10, 10, 0, 30])
+    sphericalManipulator.plot(traj2.s, limits = [-5, 30, -10, 10, 0, 30])
+    sphericalManipulator.plot(traj3.s, limits = [-5, 30, -10, 10, 0, 30])
+    sphericalManipulator.plot(traj4.s, limits = [-5, 30, -10, 10, 0, 30])
